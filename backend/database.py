@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "postgresql://postgres:your_password@localhost:5432/flashfeed_db"
+DATABASE_URL = "postgresql+psycopg2://postgres:1234@localhost:5432/flashfeed_db"
 
 engine = create_engine(DATABASE_URL)
 

@@ -4,14 +4,22 @@ from pydantic import BaseModel
 from typing import Optional
 
 # Import database session dependency and models
-from database import get_db
-from models import ArticleModel
+from backend.database import get_db
+from backend.models import ArticleModel
+
+# Import for CronJob
+from .scheduler import start_scheduler
 
 app = FastAPI(
     title="FlashFeed API",
     description="AI-powered personalized tech news platform",
     version="0.1.0"
 )
+
+@app.on_event("startup")
+def startup_event():
+    # as soon as fastapi starts, background scheduler will start
+    start_scheduler()
 
 # Pydantic Schemas for Request/Response validation
 class ArticleCreate(BaseModel):
